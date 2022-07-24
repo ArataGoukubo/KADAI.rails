@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params)
     book.save
+    flash[:alert] = 'Book was successfully created.'
     redirect_to book_path(book.id)
     
   end
@@ -29,12 +30,14 @@ class BooksController < ApplicationController
     book = Book.find(params[:id])
     book.update(book_params)
     redirect_to book_path(book.id)  
+    flash[:notice] = "Book was successfully update"
   end
   
   def destroy
   book =Book.find(params[:id])
   book.destroy
   redirect_to '/books'
+  flash[:notice] = "Book was successfully destroyed"
   end
    private
   def book_params
